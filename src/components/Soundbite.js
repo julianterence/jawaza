@@ -1,12 +1,13 @@
 import React from 'react';
 import useSound from 'use-sound';
 import rockSmith from '../audio/rock-smith-full.mp3';
-
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { StyledButton, ButtonSpan, ButtonLabel } from './styled-components.js'
 
 function Soundbite(props) {
     const [audioLength, setAudioLength] = useState(0)
     const [playing, setPlaying] = useState(false)
+    const playbackRate = props.playbackRate
 
     const [play, { sound }] = useSound(rockSmith, {
         interrupt: true,
@@ -44,7 +45,8 @@ function Soundbite(props) {
     const clickHandler = () => {
         setPlaying(false)
         play({ id: audioId });
-        setAudioLength(sound._sprite[audioId][1] / 1000);
+        sound.rate(playbackRate);
+        setAudioLength((sound._sprite[audioId][1] / 1000) / playbackRate);
         setPlaying(true)
     }
 
@@ -58,10 +60,12 @@ function Soundbite(props) {
     }
 
     return (
-        <button onClick={clickHandler}>
-            <span><div>{label}</div></span>
-            <span style={spanStyle}><div style={labelStyle}>{label}</div></span>
-        </button>
+        <StyledButton onClick={clickHandler}>
+            <ButtonSpan primary>{label}</ButtonSpan>
+            <ButtonSpan secondary style={spanStyle}>
+                <ButtonLabel style={labelStyle}>{label}</ButtonLabel>
+            </ButtonSpan>
+        </StyledButton>
     )
 }
 

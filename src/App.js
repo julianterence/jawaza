@@ -1,8 +1,12 @@
 import './App.css';
 import Soundbite from './components/Soundbite';
 import AppHeader from './components/AppHeader';
+import SettingsPanel from './components/SettingsPanel';
+import { useState } from 'react';
+
 
 function App() {
+     const [playbackRate, setPlaybackRate] = useState(1)
 
      const soundBites = {
           jada: "Jada, I love you",
@@ -32,9 +36,10 @@ function App() {
                <AppHeader />
                <div className="soundbites">
                     {Object.keys(soundBites).map((keyName, i) => (
-                         <Soundbite key={i} label={soundBites[keyName]} audioId={keyName} />
+                         <Soundbite key={i} label={soundBites[keyName]} audioId={keyName} playbackRate={playbackRate} />
                     ))}
                </div>
+               <SettingsPanel playbackRate={playbackRate} setPlaybackRate={setPlaybackRate} />
           </div>
      );
 }

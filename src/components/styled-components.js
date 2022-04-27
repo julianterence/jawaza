@@ -87,6 +87,8 @@ export const ButtonLabel = styled.div`
 `
 
 export const StyledSettingsPanel = styled.aside`
+    display: flex;
+    flex-direction: column;
     position: fixed;
     bottom: 10px;
     left: 20px;
@@ -108,5 +110,25 @@ export const StyledSettingsPanel = styled.aside`
         top: -32px;
         left: 50%;
         padding: 2px 4px;
+    }
+`
+
+export const StyledInput = styled.input`
+    appearance: none;
+    background: black;
+    height: 4px;
+    display: block;
+    width: 70%;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    &::-webkit-slider-thumb {
+        background: red;
+        width: 15px;
+        height: 15px;
+        appearance: none;
+        border-radius: 100%;
+    }
+    + label {
+        font-size: 30px;
     }
 `
